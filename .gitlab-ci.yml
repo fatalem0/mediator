@@ -1,0 +1,20 @@
+default:
+  image: sbtscala/scala-sbt:eclipse-temurin-17.0.5_8_1.8.1_2.13.10
+  before_script:
+    - ': before_script'
+    - java --version
+    - cat /etc/*-release
+    - sbt sbtVersion
+
+cache:
+  paths:
+    - $CI_PROJECT_DIR/.m2/
+    - $CI_PROJECT_DIR/.sbt/
+
+stages:
+  - test
+
+formatter:
+  stage: test
+  script:
+    - sbt scalafmtAll
