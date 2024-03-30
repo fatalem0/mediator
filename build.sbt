@@ -7,6 +7,10 @@ ThisBuild / libraryDependencies ++= Seq(
 
 ThisBuild / scalaVersion := "2.13.12"
 
+ThisBuild / scalacOptions ++= Seq(
+  "-Ymacro-annotations"
+)
+
 lazy val `mediator-app` = (project in file("./server"))
   .settings(
     name := "mediator-app",
