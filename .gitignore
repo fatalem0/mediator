@@ -1,19 +1,17 @@
 # IntelliJ IDEA
-.idea/*
+.idea/
 out/
+
+# VS Code
+.vscode/
 
 # SBT
 .bsp/
-.cache
-.history
-.lib/
-dist/*
-lib_managed/
-project/boot/
-project/plugins/project/
-src_managed/
 target/
 
-# Scala
-*.class
-*.log
+# Metals
+.metals/
+*/metals.sbt
+
+# npm
+client/node_modules/

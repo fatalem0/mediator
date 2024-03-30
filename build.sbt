@@ -7,7 +7,7 @@ ThisBuild / libraryDependencies ++= Seq(
 
 ThisBuild / scalaVersion := "2.13.12"
 
-lazy val `mediator-app` = (project in file("."))
+lazy val `mediator-app` = (project in file("./server"))
   .settings(
     name := "mediator-app",
     libraryDependencies ++= Core.dependencies
