@@ -1,0 +1,15 @@
+@define-mixin grid-center {
+  display: grid;
+  place-items: center;
+}
+
+@define-mixin flex-center $display: flex {
+  display: $display;
+  justify-content: center;
+  align-items: center;
+}
+
+@define-mixin square $size: 100% {
+  width: $size;
+  height: $size;
+}

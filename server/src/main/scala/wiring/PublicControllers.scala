@@ -1,10 +1,12 @@
 package wiring
 
-import endpoints.RegistrationController
+import cats.Applicative
+import endpoints.{ LoginController, RegistrationController }
 import utils.server._
 
 class PublicControllers[F[_]](implicit
-    val registration: RegistrationController[F]
+    val registration: RegistrationController[F],
+    val login: LoginController[F]
 )
 
 object PublicControllers {
@@ -15,15 +17,19 @@ object PublicControllers {
       ): HttpModule[F] = {
         import controllers._
 
-        registration.wire
+        registration.wire ++
+          login.wire
       }
     }
 
-  def make[F[_]](
+  def make[F[_]: Applicative](
       services: ServiceComponent[F]
   ): PublicControllers[F] = {
     implicit val registrationController: RegistrationController[F] =
       RegistrationController.make[F](services.registration)
+
+    implicit val loginController: LoginController[F] =
+      LoginController.make[F](services.login)
 
     new PublicControllers[F]
   }

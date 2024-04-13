@@ -15,9 +15,9 @@ import tofu.syntax.feither._
 import tofu.syntax.handle._
 import tofu.syntax.logging._
 import tofu.syntax.raise._
-import users.services.auth.AuthService
 import users.services.registration.Domain.Errors.RegistrationError
 import users.services.registration.Domain.Registration
+import users.services.token.TokenService
 import users.services.users.UserService
 
 @derive(applyK)
@@ -31,7 +31,7 @@ object RegistrationService extends Logging.Companion[RegistrationService] {
   final private class Impl[F[
       _
   ]: Monad: Clock: GenUUID: RegistrationError.Errors](
-      authService: AuthService[F],
+      tokenService: TokenService[F],
       userService: UserService[F]
   ) extends RegistrationService[F] {
     override def register(
@@ -45,7 +45,7 @@ object RegistrationService extends Logging.Companion[RegistrationService] {
               RegistrationError.fromUserError(_).raise[F, RegistrationError]
             )
 
-        accessToken <- authService.createAccessToken(req.email)
+        accessToken <- tokenService.createAccessToken(req.email)
       } yield accessToken
         .into[Registration.Response]
         .withFieldConst(_.accessToken, accessToken)
@@ -66,16 +66,16 @@ object RegistrationService extends Logging.Companion[RegistrationService] {
   }
 
   def make[F[_]: Monad: Clock: GenUUID: RegistrationError.Errors](
-      authService: AuthService[F],
+      tokenService: TokenService[F],
       userService: UserService[F]
   ): RegistrationService[F] =
-    new Impl[F](authService, userService)
+    new Impl[F](tokenService, userService)
 
   def makeObservable[F[
       _
   ]: Monad: Clock: GenUUID: RegistrationError.Errors: Logging.Make](
-      authService: AuthService[F],
+      tokenService: TokenService[F],
       userService: UserService[F]
   ): RegistrationService[F] =
-    new LogMid[F] attach make[F](authService, userService)
+    new LogMid[F] attach make[F](tokenService, userService)
 }

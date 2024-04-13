@@ -5,6 +5,7 @@ import configs.ServerConf
 import org.http4s.HttpApp
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.Server
+import org.http4s.server.middleware.CORS
 
 object Http4sServer {
   def buildEmber[F[_]: Async](
@@ -15,7 +16,7 @@ object Http4sServer {
       .default[F]
       .withHost(config.host)
       .withPort(config.port)
-      .withHttpApp(httpApp)
+      .withHttpApp(CORS(httpApp))
       .withShutdownTimeout(config.shutdownTimeout)
       .build
 }

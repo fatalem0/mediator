@@ -6,8 +6,7 @@ import derevo.tethys.{ tethysReader, tethysWriter }
 import sttp.tapir.Schema
 import tofu.logging.{ Loggable, LogParamValue, SingleValueLoggable }
 import tofu.{ Errors => TofuErrors }
-import users.Domain.Password.UnhashedUserPassword
-import users.Domain.{ AccessToken, UserEmail }
+import users.Domain.{ AccessToken, Password, UserEmail }
 import users.services.users.Domain.Errors.UserError
 import utils.errors.Domain.{ ErrorCode, ErrorMsg }
 import utils.errors.{ ApiError, ErrorLevel }
@@ -71,7 +70,7 @@ object Domain {
     @derive(tethysReader, tethysWriter)
     final case class Request(
         email: UserEmail,
-        password: UnhashedUserPassword
+        password: Password
     )
 
     object Request {

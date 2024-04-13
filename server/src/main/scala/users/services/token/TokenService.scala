@@ -1,4 +1,4 @@
-package users.services.auth
+package users.services.token
 
 import cats.Monad
 import cats.effect.Clock
@@ -13,16 +13,16 @@ import users.Domain.{ AccessToken, UserEmail }
 import scala.concurrent.duration.FiniteDuration
 
 @derive(applyK)
-trait AuthService[F[_]] {
+trait TokenService[F[_]] {
   def createAccessToken(email: UserEmail): F[AccessToken]
 }
 
-object AuthService {
+object TokenService {
   private val key  = "secretKey"
   private val algo = JwtAlgorithm.HS256
 
   final private class Impl[F[_]: Monad: Clock: GenUUID](ttl: FiniteDuration)
-    extends AuthService[F] {
+    extends TokenService[F] {
     override def createAccessToken(email: UserEmail): F[AccessToken] =
       for {
         now <- Clock[F].realTime
@@ -41,6 +41,6 @@ object AuthService {
       )
   }
 
-  def make[F[_]: Monad: Clock: GenUUID](ttl: FiniteDuration): AuthService[F] =
+  def make[F[_]: Monad: Clock: GenUUID](ttl: FiniteDuration): TokenService[F] =
     new Impl[F](ttl)
 }

@@ -11,7 +11,7 @@ import io.estatico.newtype.macros.newtype
 import sttp.tapir.Schema
 import tofu.generate.GenUUID
 import tofu.logging.derivation.loggable
-import users.Domain.Password.HashedUserPassword
+import users.Domain.Password.factory
 import users.Domain.UserData.UserId
 import utils.tethys._
 
@@ -23,7 +23,7 @@ object Domain {
   final case class UserData(
       id: UserId,
       email: UserEmail,
-      hashedPassword: HashedUserPassword,
+      hashedPassword: Password,
       createdAt: Instant,
       updatedAt: Instant
   )
@@ -52,40 +52,60 @@ object Domain {
     final val Example = UserEmail("some-email")
   }
 
-  sealed abstract class Password(value: String)
+  @derive(tethysReader, tethysWriter)
+  @newtype final case class Password(value: String) {
+    def hashPassword: Password =
+      Password(factory.hash(this.value))
+
+    def verifyHashedPassword(
+        attemptedPassword: Password
+    ): Boolean =
+      factory.verify(attemptedPassword.value, this.value)
+  }
 
   object Password {
-    @derive(tethysReader, tethysWriter)
-    final case class UnhashedUserPassword(value: String)
-      extends Password(value) {
-      def hashPassword: HashedUserPassword =
-        HashedUserPassword(factory.hash(this.value))
-    }
+    implicit val meta: Meta[Password] = Meta[String].imap(apply)(_.value)
 
-    object UnhashedUserPassword {
-      implicit val schema: Schema[UnhashedUserPassword] =
-        Schema
-          .string[UnhashedUserPassword]
-          .description("Нехешированный пароль пользователя")
-    }
-
-    @derive(tethysReader, tethysWriter)
-    final case class HashedUserPassword(value: String) extends Password(value) {
-      def verifyHashedPassword(
-          attemptedPassword: UnhashedUserPassword
-      ): Boolean =
-        factory.verify(attemptedPassword.value, this.value)
-    }
-
-    object HashedUserPassword {
-      implicit val schema: Schema[HashedUserPassword] =
-        Schema
-          .string[HashedUserPassword]
-          .description("Хешированный пароль пользователя")
-    }
+    implicit val schema: Schema[Password] =
+      Schema
+        .string[Password]
+        .description("Пароль пользователя")
 
     private val factory = Argon2PasswordFactory()
   }
+
+//  object Password {
+//    @derive(tethysReader, tethysWriter)
+//    @newtype final case class UnhashedUserPassword(value: String)
+//      extends Password(value) {
+//      def hashPassword: HashedUserPassword =
+//        HashedUserPassword(factory.hash(this.value))
+//    }
+//
+//    object UnhashedUserPassword {
+//      implicit val schema: Schema[UnhashedUserPassword] =
+//        Schema
+//          .string[UnhashedUserPassword]
+//          .description("Нехешированный пароль пользователя")
+//    }
+//
+//    @derive(tethysReader, tethysWriter)
+//    final case class HashedUserPassword(value: String) extends Password(value) {
+//      def verifyHashedPassword(
+//          attemptedPassword: UnhashedUserPassword
+//      ): Boolean =
+//        factory.verify(attemptedPassword.value, this.value)
+//    }
+//
+//    object HashedUserPassword {
+//      implicit val schema: Schema[HashedUserPassword] =
+//        Schema
+//          .string[HashedUserPassword]
+//          .description("Хешированный пароль пользователя")
+//    }
+//
+//    private val factory = Argon2PasswordFactory()
+//  }
 
   @derive(tethysReader, tethysWriter)
   @newtype final case class AccessToken(value: String)
