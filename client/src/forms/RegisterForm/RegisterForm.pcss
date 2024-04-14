@@ -1,0 +1,38 @@
+@import "../../styles/mixins.pcss";
+
+.register-form {
+	&__grid {
+		@mixin square;
+
+		justify-content: center;
+		align-items: center;
+		grid-template-rows: 1fr 4fr 4fr 2fr;
+
+		&__close-button-item {
+			height: 30px;
+		}
+	}
+
+	&__close-button {
+		height: 100%;
+		width: 10%;
+		float: right;
+
+		&__icon {
+			@mixin square;
+		}
+	}
+
+	&__register-button {
+		height: var(--input-height);
+		width: 100%;
+		max-width: 300px;
+		border-radius: 16px;
+		background-color: var(--border-button-black-color);
+
+		&__body {
+			color: var(--text-white-color);
+			font-size: 1.2em;
+		}
+	}
+}

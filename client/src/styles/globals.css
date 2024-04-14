@@ -1,58 +1,58 @@
 * {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  box-sizing: border-box;
-  -webkit-touch-callout: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	box-sizing: border-box;
+	-webkit-touch-callout: none;
 
-  &::before,
-  &::after {
-    box-sizing: inherit;
-  }
+	&::before,
+	&::after {
+		box-sizing: inherit;
+	}
 }
 
 html {
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  height: 100% !important;
-  text-size-adjust: none;
-  scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	min-height: 100vh;
+	height: 100% !important;
+	text-size-adjust: none;
+	scroll-behavior: smooth;
 }
 
 body {
-  min-width: 360px;
-  min-height: inherit;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+	min-width: 360px;
+	min-height: inherit;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
 }
 
 #root,
 .app {
-  height: inherit;
-  min-height: inherit;
+	height: inherit;
+	min-height: inherit;
 }
 
 .app {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 svg {
-  display: block;
-  fill: currentColor;
+	display: block;
+	fill: currentColor;
 }
 
 #svg-sprite {
-  display: none !important;
+	display: none !important;
 }
 
 #svg-sprite {
-  symbol {
-    &,
-    * {
-      fill: currentColor;
-    }
-  }
+	symbol {
+		&,
+		* {
+			fill: currentColor;
+		}
+	}
 }

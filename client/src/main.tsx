@@ -6,9 +6,9 @@ import "./styles"
 import "virtual:svg-icons-register"
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <div className="app">
-      <RouterProvider router={router} />
-    </div>
-  </React.StrictMode>,
+	<React.StrictMode>
+		<div className="app">
+			<RouterProvider router={router} />
+		</div>
+	</React.StrictMode>,
 )

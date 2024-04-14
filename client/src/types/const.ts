@@ -1,5 +1,7 @@
 export enum AppRoutes {
-  main = "/",
-  warning = "warning",
-  register = "register"
+	main = "/",
+	warning = "warning",
+	register = "register",
+
+	stub = "stub"
 }

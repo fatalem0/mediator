@@ -1,37 +1,37 @@
 .input {
-  --maxWidth: 300px;
-  --height: var(--input-height);
-  --padding: var(--input-padding);
+	--maxWidth: 300px;
+	--height: var(--input-height);
+	--padding: var(--input-padding);
 
-  display: inline-flex;
-  align-items: center;
-  width: 100%;
-  max-width: var(--maxWidth);
-  height: var(--height);
-  padding: var(--padding);
-  border-color: #191919;
-  background-color: white;
-  border: solid;
-  border-radius: 16px;
+	display: inline-flex;
+	align-items: center;
+	width: 100%;
+	max-width: var(--maxWidth);
+	height: var(--height);
+	padding: var(--padding);
+	border-color: var(--border-button-black-color);
+	background-color: transparent;
+	border: solid;
+	border-radius: 16px;
 }
 
 .input-wrapper {
-  position: relative;
-  width: 100%;
+	position: relative;
+	width: 100%;
 
-  &__password-button {
-	  position: absolute;
-	  right: 8px;
-	  height: 100%;
-    width: 30%;
-	  background-color: transparent;
+	&__password-button {
+		position: absolute;
+		right: 8px;
+		height: 100%;
+		width: 30%;
+		background-color: transparent;
 
-	  &__body {
-	    width: 100%;
+		&__body {
+			width: 100%;
 
-	    &__icon {
-		    height: 1.5em;
-	    }
-	  }
-  }
+			&__icon {
+				height: 1.5em;
+			}
+		}
+	}
 }
