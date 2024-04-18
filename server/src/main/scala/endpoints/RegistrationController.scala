@@ -2,9 +2,9 @@ package endpoints
 
 import sttp.tapir.json.tethysjson.jsonBody
 import sttp.tapir.{ endpoint, Endpoint }
-import users.services.registration.Domain.Errors.RegistrationError
-import users.services.registration.Domain.Registration
-import users.services.registration.RegistrationService
+import mediator.services.registration.Domain.Errors.RegistrationError
+import mediator.services.registration.Domain.Registration
+import mediator.services.registration.RegistrationService
 import utils.errors.ApiError
 import utils.server.{ ApiBuilder, HttpModule, WireWithLogic }
 

@@ -1,4 +1,4 @@
-package users.services.login
+package mediator.services.login
 
 import cats.data.NonEmptyList
 import derevo.derive
@@ -7,7 +7,7 @@ import org.postgresql.util.PSQLException
 import sttp.tapir.Schema
 import tofu.logging.{ Loggable, LogParamValue, SingleValueLoggable }
 import tofu.{ Errors => TofuErrors }
-import users.Domain.{ AccessToken, Password, UserEmail }
+import mediator.Domain.{ AccessToken, Password, UserEmail }
 import utils.errors.Domain.{ ErrorCode, ErrorMsg }
 import utils.errors.{ ApiError, ErrorLevel }
 

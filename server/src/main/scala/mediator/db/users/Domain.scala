@@ -1,4 +1,4 @@
-package users.db.users
+package mediator.db.users
 
 import org.postgresql.util.PSQLException
 import utils.db.{ PSQLExceptionHandler, SQLErrorJoiner }

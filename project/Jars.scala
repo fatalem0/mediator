@@ -61,12 +61,26 @@ object Jars {
     val core = "com.outr" %% "scalapass" % scalapassVersion
   }
 
+  object sttp {
+    private val sttpVersion = "3.9.5"
+
+    val async = "com.softwaremill.sttp.client3" %% "async-http-client-backend-cats"  % sttpVersion
+    val core  = "com.softwaremill.sttp.client3" %% "core"                            % sttpVersion
+  }
+
   object tapir {
     private val tapirVersion = "1.10.4"
 
     val core   = "com.softwaremill.sttp.tapir" %% "tapir-core"          % tapirVersion
     val http4s = "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % tapirVersion
     val tethys = "com.softwaremill.sttp.tapir" %% "tapir-json-tethys"   % tapirVersion
+  }
+
+  object tethys {
+    private val tethysVersion = "0.26.0"
+
+    val core       = "com.tethys-json" %% "tethys"            % tethysVersion
+    val enumeratum = "com.tethys-json" %% "tethys-enumeratum" % tethysVersion
   }
 
   object tofu {

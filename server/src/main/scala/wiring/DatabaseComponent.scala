@@ -2,7 +2,7 @@ package wiring
 
 import cats.effect.{ Async, Resource }
 import doobie.Transactor
-import users.db.users.UserStorage
+import mediator.db.users.UserStorage
 import utils.db.{ DatabaseTransactor, SafeTransactor }
 
 class DatabaseComponent[F[_]](implicit

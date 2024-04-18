@@ -25,9 +25,13 @@ object Dependencies {
         profunktor.jwtAuth,
         pureconfig.core,
         scalapass.core,
+        sttp.async,
+        sttp.core,
         tapir.core,
         tapir.http4s,
         tapir.tethys,
+        tethys.core,
+        tethys.enumeratum,
         tofu.cats,
         tofu.layout,
         tofu.logging

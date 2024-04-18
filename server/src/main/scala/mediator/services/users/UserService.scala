@@ -1,9 +1,9 @@
-package users.services.users
+package mediator.services.users
 
 import cats.effect.Clock
 import cats.syntax.flatMap._
 import cats.syntax.functor._
-import users.db.users.Domain.Errors.CheckError
+import mediator.db.users.Domain.Errors.CheckError
 import cats.{ Applicative, Monad }
 import derevo.derive
 import derevo.tagless.applyK
@@ -12,12 +12,12 @@ import tofu.generate.GenUUID
 import tofu.syntax.feither._
 import tofu.syntax.handle._
 import tofu.syntax.raise._
-import users.Domain.UserData.UserId
-import users.Domain.{ UserData, UserEmail }
-import users.db.users.Domain.Errors.CreateError
-import users.db.users.UserStorage
-import users.services.registration.Domain.Registration
-import users.services.users.Domain.Errors.UserError
+import mediator.Domain.UserData.UserId
+import mediator.Domain.{ UserData, UserEmail }
+import mediator.db.users.Domain.Errors.CreateError
+import mediator.db.users.UserStorage
+import mediator.services.registration.Domain.Registration
+import mediator.services.users.Domain.Errors.UserError
 
 @derive(applyK)
 trait UserService[F[_]] {

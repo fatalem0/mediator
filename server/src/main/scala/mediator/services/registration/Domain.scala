@@ -1,4 +1,4 @@
-package users.services.registration
+package mediator.services.registration
 
 import cats.data.NonEmptyList
 import derevo.derive
@@ -6,8 +6,8 @@ import derevo.tethys.{ tethysReader, tethysWriter }
 import sttp.tapir.Schema
 import tofu.logging.{ Loggable, LogParamValue, SingleValueLoggable }
 import tofu.{ Errors => TofuErrors }
-import users.Domain.{ AccessToken, Password, UserEmail }
-import users.services.users.Domain.Errors.UserError
+import mediator.Domain.{ AccessToken, Password, UserEmail }
+import mediator.services.users.Domain.Errors.UserError
 import utils.errors.Domain.{ ErrorCode, ErrorMsg }
 import utils.errors.{ ApiError, ErrorLevel }
 

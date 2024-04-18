@@ -1,4 +1,4 @@
-package users.services.token
+package mediator.services.token
 
 import cats.Monad
 import cats.effect.Clock
@@ -8,7 +8,7 @@ import derevo.derive
 import derevo.tagless.applyK
 import pdi.jwt._
 import tofu.generate.GenUUID
-import users.Domain.{ AccessToken, UserEmail }
+import mediator.Domain.{ AccessToken, UserEmail }
 
 import scala.concurrent.duration.FiniteDuration
 

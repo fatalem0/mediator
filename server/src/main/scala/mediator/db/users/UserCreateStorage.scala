@@ -1,4 +1,4 @@
-package users.db.users
+package mediator.db.users
 
 import cats.effect.MonadCancelThrow
 import cats.tagless.syntax.functorK._
@@ -7,7 +7,7 @@ import derevo.tagless.applyK
 import doobie.implicits._
 import doobie.postgres.implicits._
 import doobie.{ ConnectionIO, Transactor }
-import users.Domain.UserData
+import mediator.Domain.UserData
 
 @derive(applyK)
 private[db] trait UserCreateStorage[F[_]] {

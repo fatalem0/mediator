@@ -13,6 +13,7 @@ object Application {
     for {
       core: CoreComponent[I]         <- Resource.eval(CoreComponent.make[I])
       database: DatabaseComponent[I] <- DatabaseComponent.make[I](core)
+      integration: IntegrationComponent[I] <- IntegrationComponent.make[I](core)
       services: ServiceComponent[I] = ServiceComponent.make[I](core, database)
       publicControllers: PublicControllers[I] = PublicControllers.make[I](
         services

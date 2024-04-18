@@ -3,9 +3,9 @@ package endpoints
 import cats.Applicative
 import sttp.tapir.json.tethysjson.jsonBody
 import sttp.tapir.{ endpoint, Endpoint }
-import users.services.login.Domain.Errors.LoginError
-import users.services.login.Domain.Login
-import users.services.login.LoginService
+import mediator.services.login.Domain.Errors.LoginError
+import mediator.services.login.Domain.Login
+import mediator.services.login.LoginService
 import utils.errors.ApiError
 import utils.server.{ ApiBuilder, HttpModule, WireWithLogic }
 

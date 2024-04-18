@@ -2,10 +2,10 @@ package wiring
 
 import cats.effect.{ Async, Clock }
 import tofu.generate.GenUUID
-import users.services.token.TokenService
-import users.services.login.LoginService
-import users.services.registration.RegistrationService
-import users.services.users.UserService
+import mediator.services.token.TokenService
+import mediator.services.login.LoginService
+import mediator.services.registration.RegistrationService
+import mediator.services.users.UserService
 
 class ServiceComponent[F[_]](implicit
     val auth: TokenService[F],

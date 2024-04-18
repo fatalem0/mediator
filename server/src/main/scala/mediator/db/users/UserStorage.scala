@@ -1,4 +1,4 @@
-package users.db.users
+package mediator.db.users
 
 import cats.effect.{ Clock, MonadCancelThrow }
 import cats.syntax.apply._
@@ -14,8 +14,8 @@ import tofu.logging.Logging
 import tofu.syntax.feither._
 import tofu.syntax.foption._
 import tofu.syntax.logging._
-import users.Domain.{ UserData, UserEmail }
-import users.db.users.Domain.Errors.{ CheckError, CreateError, ReadError }
+import mediator.Domain.{ UserData, UserEmail }
+import mediator.db.users.Domain.Errors.{ CheckError, CreateError, ReadError }
 import utils.db.{ DatabaseRunner, SafeTransactor, SQLErrorJoiner }
 
 @derive(applyK)

@@ -1,9 +1,9 @@
-package users.services.users
+package mediator.services.users
 
 import org.postgresql.util.PSQLException
 import tofu.logging.{ Loggable, LogParamValue, SingleValueLoggable }
 import tofu.{ Errors => TofuErrors }
-import users.Domain.UserEmail
+import mediator.Domain.UserEmail
 import utils.errors.Domain.{ ErrorCode, ErrorMsg }
 import utils.errors.{ ApiError, ErrorLevel }
 

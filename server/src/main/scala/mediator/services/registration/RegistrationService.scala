@@ -1,4 +1,4 @@
-package users.services.registration
+package mediator.services.registration
 
 import cats.effect.Clock
 import cats.syntax.apply._
@@ -15,10 +15,10 @@ import tofu.syntax.feither._
 import tofu.syntax.handle._
 import tofu.syntax.logging._
 import tofu.syntax.raise._
-import users.services.registration.Domain.Errors.RegistrationError
-import users.services.registration.Domain.Registration
-import users.services.token.TokenService
-import users.services.users.UserService
+import mediator.services.registration.Domain.Errors.RegistrationError
+import mediator.services.registration.Domain.Registration
+import mediator.services.token.TokenService
+import mediator.services.users.UserService
 
 @derive(applyK)
 trait RegistrationService[F[_]] {

@@ -10,7 +10,8 @@ final case class AppConf(
     server: ServerConf,
     shutdown: ShutdownConf,
     auth: AuthConf,
-    database: DatabaseConf
+    database: DatabaseConf,
+    integration: IntegrationConf
 )
 
 object AppConf {

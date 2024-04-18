@@ -1,4 +1,4 @@
-package users
+package mediator
 
 import cats.Functor
 import cats.syntax.functor._
@@ -11,8 +11,8 @@ import io.estatico.newtype.macros.newtype
 import sttp.tapir.Schema
 import tofu.generate.GenUUID
 import tofu.logging.derivation.loggable
-import users.Domain.Password.factory
-import users.Domain.UserData.UserId
+import mediator.Domain.Password.factory
+import mediator.Domain.UserData.UserId
 import utils.tethys._
 
 import java.time.Instant

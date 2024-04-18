@@ -1,4 +1,4 @@
-package users.services.login
+package mediator.services.login
 
 import cats.syntax.applicative._
 import cats.syntax.apply._
@@ -14,11 +14,11 @@ import tofu.syntax.feither._
 import tofu.syntax.handle._
 import tofu.syntax.logging._
 import tofu.syntax.raise._
-import users.db.users.Domain.Errors.ReadError
-import users.db.users.UserStorage
-import users.services.login.Domain.Errors.LoginError
-import users.services.login.Domain.Login
-import users.services.token.TokenService
+import mediator.db.users.Domain.Errors.ReadError
+import mediator.db.users.UserStorage
+import mediator.services.login.Domain.Errors.LoginError
+import mediator.services.login.Domain.Login
+import mediator.services.token.TokenService
 
 @derive(applyK)
 trait LoginService[F[_]] {

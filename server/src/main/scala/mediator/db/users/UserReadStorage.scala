@@ -1,4 +1,4 @@
-package users.db.users
+package mediator.db.users
 
 import cats.effect.MonadCancelThrow
 import cats.tagless.syntax.functorK._
@@ -8,7 +8,7 @@ import doobie.implicits._
 import doobie.postgres.implicits._
 import doobie.{ ConnectionIO, Transactor }
 import tofu.logging.Logging
-import users.Domain.{ UserData, UserEmail }
+import mediator.Domain.{ UserData, UserEmail }
 
 @derive(applyK)
 private[db] trait UserReadStorage[F[_]] {
