@@ -2,9 +2,9 @@ package endpoints
 
 import sttp.tapir.json.tethysjson.jsonBody
 import sttp.tapir.{ endpoint, Endpoint }
-import mediator.services.registration.Domain.Errors.RegistrationError
-import mediator.services.registration.Domain.Registration
-import mediator.services.registration.RegistrationService
+import mediator.registration.Domain.Errors.RegistrationError
+import mediator.registration.Domain.Registration
+import mediator.registration.RegistrationService
 import utils.errors.ApiError
 import utils.server.{ ApiBuilder, HttpModule, WireWithLogic }
 
@@ -30,33 +30,30 @@ object RegistrationController {
       ApiError,
       Registration.Response,
       Any
-    ] =
-      endpoint
-        .summary("Регистрация пользователя")
-        .post
-        .in(ApiV1 / "register")
-        .in(jsonBody[Registration.Request])
-        .errorOut(
-          ApiError.makeOneOf[RegistrationError](RegistrationError.variants)
-        )
-        .out(jsonBody[Registration.Response])
+    ] = endpoint
+      .summary("Регистрация пользователя")
+      .post
+      .in(ApiV1 / "register")
+      .in(jsonBody[Registration.Request])
+      .errorOut(
+        ApiError.makeOneOf[RegistrationError](RegistrationError.variants)
+      )
+      .out(jsonBody[Registration.Response])
   }
 
   implicit val wireWithLogic: WireWithLogic[RegistrationController] =
     new WireWithLogic[RegistrationController] {
       override def wire[F[_]](controller: RegistrationController[F])(implicit
           builder: ApiBuilder[F]
-      ): HttpModule[F] =
-        List(
-          builder.build(
-            controller.register,
-            protocol.register
-          )
+      ): HttpModule[F] = List(
+        builder.build(
+          controller.register,
+          protocol.register
         )
+      )
     }
 
   def make[F[_]](
       service: RegistrationService[F]
-  ): RegistrationController[F] =
-    new Impl[F](service)
+  ): RegistrationController[F] = new Impl[F](service)
 }

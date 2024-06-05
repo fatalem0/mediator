@@ -16,12 +16,11 @@ case class ServerConf(
 )
 
 object ServerConf {
-  implicit val portConfigReader: ConfigReader[Port] =
-    ConfigReader[Int].emap(i =>
-      Port
-        .fromInt(i)
-        .toRight(CannotConvert(i.toString, "Port", "is not a port"))
-    )
+  implicit val portConfigReader: ConfigReader[Port] = ConfigReader[Int].emap(i =>
+    Port
+      .fromInt(i)
+      .toRight(CannotConvert(i.toString, "Port", "is not a port"))
+  )
 
   implicit val hostConfigReader: ConfigReader[Host] =
     ConfigReader[String].emap(s =>

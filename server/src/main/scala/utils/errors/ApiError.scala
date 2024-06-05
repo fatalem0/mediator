@@ -24,11 +24,10 @@ object ApiError {
     def apply[A](implicit descriptor: Descriptor[A]): Descriptor[A] = descriptor
   }
 
-  implicit def jsonReader: JsonReader[ApiError] =
-    JsonReader.builder
-      .addField[ErrorCode]("errorCode")
-      .addField[ErrorMsg]("errorMsg")
-      .buildReader(ApiError(_, _))
+  implicit def jsonReader: JsonReader[ApiError] = JsonReader.builder
+    .addField[ErrorCode]("errorCode")
+    .addField[ErrorMsg]("errorMsg")
+    .buildReader(ApiError(_, _))
 
   implicit def jsonWriter: JsonWriter[ApiError] =
     JsonWriter
@@ -44,40 +43,38 @@ object ApiError {
 
   private def genApiErrors[E](variants: NonEmptyList[E])(implicit
       descriptor: Descriptor[E]
-  ): NonEmptyMap[ErrorLevel, NonEmptyList[ApiError]] =
-    variants
-      .map { v =>
-        (
-          descriptor.level(v),
-          ApiError(
-            descriptor.code(v),
-            descriptor.message(v)
-          )
+  ): NonEmptyMap[ErrorLevel, NonEmptyList[ApiError]] = variants
+    .map { v =>
+      (
+        descriptor.level(v),
+        ApiError(
+          descriptor.code(v),
+          descriptor.message(v)
         )
-      }
-      .groupByNem { case (level, _) => level }
-      .map(_.map { case (_, err) => err })
+      )
+    }
+    .groupByNem { case (level, _) => level }
+    .map(_.map { case (_, err) => err })
 
   def makeOneOf[E](variants: NonEmptyList[E])(implicit
       descriptor: Descriptor[E]
   ): EndpointOutput.OneOf[ApiError, ApiError] = {
-    val errorVariants =
-      genApiErrors[E](variants).toNel
-        .map { case (l, errs) =>
-          val apiErrorExamples =
-            errs.map { err =>
-              Example.of(
-                err,
-                err.errorCode.value.some
-              )
-            }.toList
-
-          oneOfVariant(
-            statusCode(l.code).and(
-              jsonBody[ApiError].examples(apiErrorExamples)
+    val errorVariants = genApiErrors[E](variants).toNel
+      .map { case (l, errs) =>
+        val apiErrorExamples =
+          errs.map { err =>
+            Example.of(
+              err,
+              err.errorCode.value.some
             )
+          }.toList
+
+        oneOfVariant(
+          statusCode(l.code).and(
+            jsonBody[ApiError].examples(apiErrorExamples)
           )
-        }
+        )
+      }
 
     oneOf(
       errorVariants.head,

@@ -16,8 +16,7 @@ trait DatabaseRunner[Module[_[_]], Expr[_]] {
 object DatabaseRunner {
   def apply[Module[_[_]], Expr[_]](implicit
       runner: DatabaseRunner[Module, Expr]
-  ): DatabaseRunner[Module, Expr] =
-    runner
+  ): DatabaseRunner[Module, Expr] = runner
 
   final private class Impl[Module[_[_]]: ApplyK, Expr[_]: MonadCancelThrow](
       transactor: SafeTransactor[Expr]
@@ -34,11 +33,9 @@ object DatabaseRunner {
 
   implicit def derive[Module[_[_]]: ApplyK, Expr[_]: MonadCancelThrow](implicit
       transactor: SafeTransactor[Expr]
-  ): DatabaseRunner[Module, Expr] =
-    new Impl(transactor)
+  ): DatabaseRunner[Module, Expr] = new Impl(transactor)
 
   def make[Module[_[_]]: ApplyK, Expr[_]: MonadCancelThrow](
       transactor: SafeTransactor[Expr]
-  ): DatabaseRunner[Module, Expr] =
-    new Impl(transactor)
+  ): DatabaseRunner[Module, Expr] = new Impl(transactor)
 }

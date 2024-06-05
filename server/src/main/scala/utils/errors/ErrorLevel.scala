@@ -14,6 +14,5 @@ object ErrorLevel {
   case object Internal      extends ErrorLevel(StatusCode.InternalServerError)
   case object AlreadyExists extends ErrorLevel(StatusCode.Conflict)
 
-  implicit val order: Order[ErrorLevel] =
-    Order.by[ErrorLevel, Int](_.code.code)
+  implicit val order: Order[ErrorLevel] = Order.by[ErrorLevel, Int](_.code.code)
 }

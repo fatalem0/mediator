@@ -13,7 +13,7 @@ object DatabaseTransactor {
       connectEC <- ExecutionContexts.fixedThreadPool[I](config.awaitingThreads)
       doobieConfig = config.makeDoobieConfig
 
-      initialTransactor <- HikariTransactor.fromConfigCustomEc(
+      initialTransactor <- HikariTransactor.fromConfig[I](
         doobieConfig,
         connectEC
       )

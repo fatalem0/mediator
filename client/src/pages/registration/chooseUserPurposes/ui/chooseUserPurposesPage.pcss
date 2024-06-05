@@ -1,0 +1,85 @@
+@import "../../../../styles/mixins.pcss";
+
+.choose-user-purposes-page {
+	@mixin square;
+	background-color: white;
+	position: absolute;
+  top: 45%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+	&__body {
+		display: flex;
+    flex-flow: column;
+		justify-content: center;
+		align-items: center;
+
+		/* background-color: gray; */
+
+		margin: 0px auto;
+		padding: 32px 8px;
+
+		max-width: 800px;
+		min-height: 100%;
+	}
+
+	&__buttons-component {
+		@mixin flex-center;
+		flex-flow: column;
+	}
+
+	&__back-button {
+		@mixin flex-center;
+		@mixin square 50px;
+		border: 0.05em solid black;
+		border-radius: 50%;
+		margin-bottom: 32px;
+		align-self: flex-start;
+
+		&__icon {
+			color: black;
+		}
+	}
+
+	&__grid {
+		/* grid-template-rows: 1fr 1fr 1; */
+
+		&__text-item {
+			/* text-align: center; */
+		}
+
+		&__button-item {
+			@mixin square;
+			/* padding: auto 4%; */
+		}
+	}
+
+	&__title {
+		color: black;
+		font-size: 50px;
+		text-align: center;
+	}
+
+	&__stack {
+		width: 60%;
+		display: flex;
+  	justify-content: center;
+  	align-items: center;
+	}
+
+	&__button {
+		@mixin flex-center;
+		@mixin square 80%;
+
+		border-radius: 16px;
+		border: 0.05em solid black;
+
+		&__active {
+			@mixin square 80%;
+
+			border-radius: 16px;
+			background-color: black;
+			color: white;
+		}
+	}
+}

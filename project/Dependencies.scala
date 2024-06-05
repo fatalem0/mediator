@@ -5,7 +5,9 @@ object Dependencies {
   import Jars._
 
   private def testDependencies: Vector[ModuleID] =
-    Vector.empty[ModuleID]
+    Vector(
+      testing.scalaTest
+    )
 
   object Core {
     protected def srcDependencies: Vector[ModuleID] =
@@ -19,7 +21,10 @@ object Dependencies {
         doobie.core,
         doobie.hikari,
         doobie.postgres,
+        enumeratum.core,
+        enumeratum.doobie,
         estatico.newtype,
+        fs2.core,
         http4s.dsl,
         http4s.emberServer,
         profunktor.jwtAuth,
@@ -28,6 +33,7 @@ object Dependencies {
         sttp.async,
         sttp.core,
         tapir.core,
+        tapir.enumeratum,
         tapir.http4s,
         tapir.tethys,
         tethys.core,
@@ -35,6 +41,18 @@ object Dependencies {
         tofu.cats,
         tofu.layout,
         tofu.logging
+      )
+
+    def dependencies: Vector[ModuleID] = srcDependencies ++ testDependencies.map(_ % Test)
+  }
+
+  object Chat {
+    protected def srcDependencies: Vector[ModuleID] =
+      Vector(
+        cats.effect,
+        fs2.core,
+        http4s.emberServer,
+        http4s.dsl
       )
 
     def dependencies: Vector[ModuleID] = srcDependencies ++ testDependencies.map(_ % Test)

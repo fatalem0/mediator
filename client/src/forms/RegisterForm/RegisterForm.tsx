@@ -8,6 +8,8 @@ import { useNavigate } from "react-router"
 import { AppRoutes } from "../../types/const"
 import { register } from "../../services/Endpoints"
 import "./RegisterForm.pcss"
+import { useContext } from "react"
+import { UserContext } from "../../models/UserContext"
 
 interface IRegisterForm {
 	submitButtonLabel: string
@@ -20,18 +22,30 @@ function RegisterForm(
 		onClose
 	}: IRegisterForm
 ) {
+	const context = useContext(UserContext)
 	const navigate = useNavigate()
 
 	async function handleSubmit(creds: UserCredentials) {
-		try {
-			let response = await register(creds)
-			console.log(response);
+		await register(creds)
+			.then(function (response) {
+				let userId = response.data.userId
 
-			navigate(AppRoutes.register, { replace: true })
-		} catch (error) {
-			console.log(error)
+				context.setUserId(userId)
+				navigate(AppRoutes.warning, { replace: true })
+			})
+			.catch(function (error) {
+				console.log(error)
+			})
 		}
-	}
+		// try {
+		// 	let response = await register(creds)
+		// 	console.log(response);
+
+		// 	navigate(AppRoutes.warning, { replace: true })
+		// } catch (error) {
+		// 	console.log(error)
+		// }
+	// }
 
 	const formik = useFormik({
 		initialValues: {

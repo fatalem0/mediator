@@ -47,10 +47,14 @@ object ShutdownHook extends Logging.Companion[ShutdownHook] {
   def noop[F[_]: InvariantMonoidal]: ShutdownHook[F] = new Noop[F]
   def log[F[_]: FlatMap: ShutdownHook.Log]: ShutdownHook[Mid[F, *]] =
     new LoggingHook[F]
-  def timed[F[_]: FlatMap: Sleep](delay: FiniteDuration)
-      : ShutdownHook[Mid[F, *]] = new TimedHook[F](delay)
-  def probe[F[_]: FlatMap](probeControl: ProbeControl[F])
-      : ShutdownHook[Mid[F, *]] = new ProbeHook[F](probeControl)
+  def timed[F[_]: FlatMap: Sleep](delay: FiniteDuration): ShutdownHook[Mid[
+    F,
+    *
+  ]] = new TimedHook[F](delay)
+  def probe[F[_]: FlatMap](probeControl: ProbeControl[F]): ShutdownHook[Mid[
+    F,
+    *
+  ]] = new ProbeHook[F](probeControl)
 
   def make[F[_]: Monad: Sleep: ShutdownHook.Log](
       delay: FiniteDuration,

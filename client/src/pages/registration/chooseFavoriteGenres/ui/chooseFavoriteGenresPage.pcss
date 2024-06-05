@@ -1,0 +1,66 @@
+@import "../../../../styles/mixins.pcss";
+
+.choose-favorite-genres-page {
+	@mixin square;
+
+	&__body {
+		@mixin flex-center;
+    flex-flow: column;
+		padding: 32px 64px;
+	}
+
+	&__back-button {
+		@mixin flex-center;
+		@mixin square 50px;
+		border: 0.05em solid black;
+		border-radius: 50%;
+		margin-bottom: 32px;
+		align-self: flex-start;
+
+		&__icon {
+			color: black;
+		}
+	}
+
+	&__grid {
+		/* grid-template-rows: 1fr 1fr 1; */
+
+		&__text-item {
+			/* text-align: center; */
+		}
+
+		&__button-item {
+			@mixin square;
+			/* padding: auto 4%; */
+		}
+	}
+
+	/* &__title {
+		color: black;
+		font-size: 50px;
+		text-align: center;
+	} */
+
+	&__stack {
+		width: 60%;
+		display: flex;
+  	justify-content: center;
+  	align-items: center;
+	}
+
+	&__button {
+		@mixin flex-center;
+		@mixin square 80%;
+
+		border-radius: 16px;
+		border: 0.05em solid black;
+
+		&__active {
+			@mixin square 80%;
+
+			border-radius: 16px;
+			background-color: black;
+			color: white;
+		}
+	}
+}

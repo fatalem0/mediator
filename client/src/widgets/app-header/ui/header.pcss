@@ -1,0 +1,20 @@
+@import "../../../styles/mixins.pcss";
+
+.header {
+	height: 40px;
+	width: 100%;
+	/* @mixin square; */
+	color: white;
+
+	&__logo {
+		/* color: black;
+		width: 15em;
+		height: 10em; */
+	}
+
+	&__button-container {
+		@mixin square;
+		@mixin flex-center;
+		gap: 5%;
+	}
+}

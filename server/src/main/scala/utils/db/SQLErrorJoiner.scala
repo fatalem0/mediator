@@ -13,6 +13,5 @@ object SQLErrorJoiner {
 
   implicit def deriveForEither[E, A](implicit
       joiner: SQLErrorJoiner[E]
-  ): SQLErrorJoiner[Either[E, A]] =
-    error => Left(joiner.join(error))
+  ): SQLErrorJoiner[Either[E, A]] = error => Left(joiner.join(error))
 }

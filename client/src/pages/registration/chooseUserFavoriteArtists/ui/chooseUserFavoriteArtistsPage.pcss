@@ -1,0 +1,47 @@
+@import "../../../../styles/mixins.pcss";
+
+.choose-user-favorite-artists-page {
+	@mixin square;
+
+	&__body {
+		@mixin flex-center;
+    flex-flow: column;
+		padding: 32px 64px;
+	}
+
+	&__back-button {
+		@mixin flex-center;
+		@mixin square 50px;
+		border: 0.05em solid black;
+		border-radius: 50%;
+		margin-bottom: 32px;
+		align-self: flex-start;
+
+		&__icon {
+			color: black;
+		}
+	}
+
+	&__title {
+		color: black;
+		font-size: 3em;
+	}
+
+	&__footer {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		background-color: #f8f9fa; /* Light grey background */
+		color: black;
+		text-align: center;
+		padding: 10px 0; /* Padding to give some height to the footer */
+		box-shadow: 0 -2px 10px rgba(0,0,0,0.1); /* Optional: adds shadow for better visibility */
+		z-index: 100; /* Ensures the footer is above other content */
+
+		&__continue-button {
+			margin: auto;
+			width: 200px; /* Set a specific width for the button */
+		}
+	}
+}
