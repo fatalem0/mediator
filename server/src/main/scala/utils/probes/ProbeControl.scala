@@ -12,6 +12,7 @@ class ProbeControl[F[_]] private (ref: Ref[F, ProbeStatus]) {
 }
 
 object ProbeControl {
-  def make[I[_]: Sync: Functor]: I[ProbeControl[I]] =
-    Ref[I].of[ProbeStatus](ProbeStatus.NotReady).map(new ProbeControl(_))
+  def make[I[_]: Sync: Functor]: I[ProbeControl[I]] = Ref[I].of[ProbeStatus](
+    ProbeStatus.NotReady
+  ).map(new ProbeControl(_))
 }

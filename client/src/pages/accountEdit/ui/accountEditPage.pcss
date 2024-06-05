@@ -1,0 +1,34 @@
+@import "../../../styles/mixins.pcss";
+
+.account-edit-page {
+	&__body {
+		display: flex;
+    flex-flow: column;
+		place-content: center flex-start;
+		align-items: flex-start;
+
+		/* background-color: gray; */
+
+		margin: 0px auto;
+		padding: 32px 8px;
+
+		max-width: 800px;
+		min-height: 800px;
+	}
+
+	&__back-button {
+		@mixin flex-center;
+		@mixin square 50px;
+		border: 0.05em solid black;
+		border-radius: 50%;
+		margin-bottom: 32px;
+
+		&__icon {
+			color: black;
+		}
+	}
+
+	&__edit-account {
+		@mixin square;
+	}
+}

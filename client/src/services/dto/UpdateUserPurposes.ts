@@ -1,0 +1,3 @@
+interface UpdateUserPurposes {
+	userPurposeIds: string[]
+}

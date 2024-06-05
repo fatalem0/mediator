@@ -28,6 +28,5 @@ object ApiBuilder {
         )
   }
 
-  def make[F[_]: Functor]: ApiBuilder[F] =
-    new Impl[F]
+  def make[F[_]: Functor]: ApiBuilder[F] = new Impl[F]
 }

@@ -25,10 +25,11 @@ object StartupHook extends Logging.Companion[StartupHook] {
     override def start: F[ExitCode] =
       for {
         _ <- control.ready
-        _ <- MonadCancelThrow[F].guaranteeCase(loop) {
-          case Outcome.Canceled() => shutdown.shutdown
-          case _                  => MonadCancelThrow[F].unit
-        }
+        _ <-
+          MonadCancelThrow[F].guaranteeCase(loop) {
+            case Outcome.Canceled() => shutdown.shutdown
+            case _                  => MonadCancelThrow[F].unit
+          }
       } yield ExitCode.Success
   }
 
@@ -47,13 +48,11 @@ object StartupHook extends Logging.Companion[StartupHook] {
       loop: F[Unit],
       control: ProbeControl[F],
       shutdown: ShutdownHook[F]
-  ): StartupHook[F] =
-    new Impl[F](loop, control, shutdown)
+  ): StartupHook[F] = new Impl[F](loop, control, shutdown)
 
   def makeObservable[F[_]: MonadCancelThrow: StartupHook.Log](
       loop: F[Unit],
       control: ProbeControl[F],
       shutdown: ShutdownHook[F]
-  ): StartupHook[F] =
-    new LogMid[F] attach make[F](loop, control, shutdown)
+  ): StartupHook[F] = new LogMid[F] attach make[F](loop, control, shutdown)
 }

@@ -22,8 +22,10 @@ object CoreComponent {
       implicit0(conf: AppConf) <- AppConf.load[I]
       implicit0(logMakeI: Logging.Make[I]) = Logging.Make.plain[I]
       implicit0(probeControl: ProbeControl[I]) <- ProbeControl.make[I]
-      implicit0(shutdownHook: ShutdownHook[I]) =
-        ShutdownHook.make[I](conf.shutdown.gracePeriod, probeControl)
+      implicit0(shutdownHook: ShutdownHook[I]) = ShutdownHook.make[I](
+        conf.shutdown.gracePeriod,
+        probeControl
+      )
 
       core = new CoreComponent[I]
     } yield core

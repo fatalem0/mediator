@@ -14,17 +14,17 @@ object Application {
       core: CoreComponent[I]         <- Resource.eval(CoreComponent.make[I])
       database: DatabaseComponent[I] <- DatabaseComponent.make[I](core)
       services: ServiceComponent[I] = ServiceComponent.make[I](core, database)
+
       publicControllers: PublicControllers[I] = PublicControllers.make[I](
         services
       )
 
-      run: RunComponent[I] <-
-        Resource.eval(
-          RunComponent.make[I](
-            core,
-            publicControllers
-          )
+      run: RunComponent[I] <- Resource.eval(
+        RunComponent.make[I](
+          core,
+          publicControllers
         )
+      )
 
       hook: StartupHook[I] <- run.resource
     } yield hook

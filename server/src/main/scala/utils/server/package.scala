@@ -11,7 +11,6 @@ package object server {
     def wire(implicit
         wiring: WireWithLogic[Controller],
         apiBuilder: ApiBuilder[F]
-    ): HttpModule[F] =
-      wiring.wire[F](controller)
+    ): HttpModule[F] = wiring.wire[F](controller)
   }
 }

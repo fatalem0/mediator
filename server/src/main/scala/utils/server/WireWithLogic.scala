@@ -9,6 +9,5 @@ trait WireWithLogic[Controller[_[_]]] {
 object WireWithLogic {
   def apply[Controller[_[_]]](implicit
       wireWithLogic: WireWithLogic[Controller]
-  ): WireWithLogic[Controller] =
-    wireWithLogic
+  ): WireWithLogic[Controller] = wireWithLogic
 }
